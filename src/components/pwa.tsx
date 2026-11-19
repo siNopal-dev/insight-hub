@@ -21,6 +21,6 @@ export function Pwa() {
     }
     return () => { window.removeEventListener('online', network); window.removeEventListener('offline', network); window.removeEventListener('beforeinstallprompt', before); window.removeEventListener('appinstalled', installed); window.removeEventListener('ih-update', updating); navigator.serviceWorker?.removeEventListener('controllerchange', changed); };
   }, []);
-  if (!offline && !install && !update) return null;
+  if (!offline && !update) return null;
   return <aside className="pwa-bar" aria-live="polite">{offline ? <span>Koneksi terputus. Laporan memerlukan internet.</span> : update ? <><span>Versi baru tersedia. Simpan perubahan sebelum memperbarui.</span><button onClick={() => { window.dispatchEvent(new Event('ih-update')); update.postMessage({ type: 'SKIP_WAITING' }); }} className="button primary">Perbarui</button></> : <><span>Akses Insight Hub dari layar utama.</span><button className="button primary" onClick={async () => { await install?.prompt(); await install?.userChoice; setInstall(null); }}>Pasang Aplikasi</button><button aria-label="Tutup tawaran instalasi" className="dismiss" onClick={() => setInstall(null)}>×</button></>}</aside>;
 }
