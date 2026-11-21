@@ -5,6 +5,11 @@ import { Shell } from '@/components/shell';
 import { Portal } from '@/components/portal';
 export const dynamic = 'force-dynamic';
 export default async function Home() {
-  const user = await pageUser(); const reports = await listReports();
-  return <Shell user={user}><Portal reports={reports} embedHosts={allowedEmbedHosts()} /></Shell>;
+  const user = await pageUser();
+  const reports = await listReports();
+  return (
+    <Shell user={user}>
+      <Portal reports={reports} embedHosts={allowedEmbedHosts()} />
+    </Shell>
+  );
 }

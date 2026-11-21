@@ -15,7 +15,10 @@
     "db:setup": "node --env-file=.env.local scripts/setup-db.mjs",
     "session:revoke": "node --env-file=.env.local scripts/revoke-sessions.mjs",
     "config:import": "node scripts/import-ci-env.mjs",
-    "db:secure": "node --env-file=.env.local scripts/secure-legacy-api.mjs"
+    "db:secure": "node --env-file=.env.local scripts/secure-legacy-api.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "password:set": "node --env-file=.env.local --import tsx scripts/set-profile-password.mjs"
   },
   "dependencies": {
     "@fontsource/dm-sans": "^5.3.0",
@@ -28,10 +31,12 @@
     "zod": "^4.0.0"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "0.5.17",
     "@types/node": "^22.0.0",
     "@types/pg": "^8.15.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "prettier": "3.10.1",
     "tsx": "^4.20.0",
     "typescript": "^5.9.0"
   }
