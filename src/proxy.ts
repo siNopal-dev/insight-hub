@@ -33,6 +33,6 @@ export function proxy(request: NextRequest) {
 }
 export const config = {
   matcher: [
-    '/((?!_next/static|_next/image|favicon.ico|icon-|logo-pft.jpg|sw.js|offline.html|manifest.webmanifest|robots.txt).*)',
+    '/((?!_next/static|_next/image|favicon.ico|icon-|logo-pft.png|sw.js|offline.html|manifest.webmanifest|robots.txt).*)',
   ],
 };

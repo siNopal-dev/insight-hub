@@ -16,7 +16,7 @@ export function Shell({
         <div className="topbar-inner">
           <Link href="/" className="brand" prefetch={false}>
             <span className="logo-box">
-              <img src="/logo-pft.jpg" alt="Logo PFT" width="42" height="28" />
+              <img src="/logo-pft.png" alt="Logo PFT" width="42" height="42" />
             </span>
             <span>
               <strong>Insight Hub</strong>

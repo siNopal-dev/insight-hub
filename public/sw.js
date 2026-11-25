@@ -1,12 +1,6 @@
 /* Increment on public-shell changes. Never cache authenticated pages/API/RSC/Power BI. */
-const CACHE = 'ih-public-v2';
-const PUBLIC = [
-  '/offline.html',
-  '/icon-192.png',
-  '/icon-512.png',
-  '/icon-maskable-512.png',
-  '/logo-pft.jpg',
-];
+const CACHE = 'ih-public-v3';
+const PUBLIC = ['/offline.html', '/icon-192.png', '/icon-512.png', '/logo-pft.png'];
 self.addEventListener('install', (event) => {
   event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PUBLIC)));
 });

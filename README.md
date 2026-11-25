@@ -56,6 +56,8 @@ Password hash berubah, profil nonaktif, role tidak valid, sesi dicabut atau keda
 
 Manifest dan service worker tetap aktif dalam produksi. Banner pemasangan disembunyikan; pemberitahuan offline/update tetap ada. Cache hanya aset publik dan offline.html, bukan halaman akun/API/laporan. Power BI memerlukan internet. Portal tidak membuat URL Power BI publik menjadi privat.
 
+Logo navbar memakai `public/logo-pft.png` dan ditampilkan sebagai lingkaran. Ikon aplikasi Android memakai `public/icon-192.png` dan `public/icon-512.png` sesuai `src/app/manifest.ts`. Ikon maskable hanya boleh didaftarkan bila berkasnya ada dan logonya berada di area aman agar tidak terpotong launcher Android. Setelah mengganti aset publik, naikkan versi `CACHE` di `public/sw.js` agar service worker tidak terus menyajikan gambar lama. Jika ikon Android masih lama, hapus aplikasi terpasang lalu instal ulang dari Chrome.
+
 ## Struktur
 
 - src/app: halaman dan route API.

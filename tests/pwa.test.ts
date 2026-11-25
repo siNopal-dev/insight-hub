@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import vm from 'node:vm';
 const source = readFileSync(new URL('../public/sw.js', import.meta.url), 'utf8');
 function worker() {
@@ -31,6 +31,8 @@ test('Offline cache contains only public assets, never portal/login/reports', as
   w.events.install({ waitUntil: (p: Promise<void>) => (done = p) });
   await done;
   assert.ok(w.cached.includes('/offline.html'));
+  for (const path of w.cached)
+    assert.ok(existsSync(new URL(`../public${path}`, import.meta.url)), `${path} must exist`);
   for (const path of ['/', '/login', '/setting', '/api/reports'])
     assert.ok(!w.cached.includes(path));
 });
