@@ -50,7 +50,7 @@ Daftar/detail/ubah/hapus memeriksa izin di server. Edit memeriksa kategori lama 
 
 Cookie opaque HttpOnly, Secure produksi, SameSite=Lax; server menyimpan hash ID sesi. Sesi diperiksa bersama profil dalam satu query. React cache hanya menghindari pengulangan selama render server yang sama; tidak ada cache otorisasi global. Route handler selalu membaca data terbaru.
 
-Password hash berubah, profil nonaktif, role tidak valid, sesi dicabut atau kedaluwarsa menyebabkan sesi ditolak. Role/grup terbaru digunakan pada request berikutnya. SESSION_TTL_MINUTES default 30, batas 5–120 menit, absolut tanpa silent refresh. `npm run session:revoke -- USER_ID` atau `--all` mencabut sesi. encrypted_token dipertahankan kosong untuk kompatibilitas tabel lama; utilitas seal/unseal tetap tersedia sebagai utilitas legacy, tidak dipakai login.
+Password hash berubah, profil nonaktif, role tidak valid, sesi dicabut atau kedaluwarsa menyebabkan sesi ditolak. Role/grup terbaru digunakan pada request berikutnya. Sesi berlaku 14 hari sejak login pada perangkat tersebut (absolut, tanpa silent refresh); sesi lama tetap mengikuti masa berlaku saat dibuat. `npm run session:revoke -- USER_ID` atau `--all` mencabut sesi. encrypted_token dipertahankan kosong untuk kompatibilitas tabel lama; utilitas seal/unseal tetap tersedia sebagai utilitas legacy, tidak dipakai login.
 
 ## PWA
 
