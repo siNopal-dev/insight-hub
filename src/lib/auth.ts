@@ -6,6 +6,7 @@ import { hashSession, sessionId } from './crypto';
 import { HttpError } from './http';
 import { cache } from 'react';
 import { sessionSelect, sessionUser, type SessionRecord } from './session-record';
+import { SESSION_TTL_SECONDS } from './session-duration';
 import type { User } from './types';
 export const cookieName = () =>
   process.env.NODE_ENV === 'production' ? '__Host-ih_session' : 'ih_session';
@@ -33,9 +34,6 @@ export async function pageUser(admin = false) {
 }
 export async function newSession(user: User, passwordHash: string) {
   const id = sessionId();
-  const configured = Math.min(120, Math.max(5, Number(process.env.SESSION_TTL_MINUTES) || 30)) * 60;
-  const ttl = configured;
-  if (!Number.isFinite(ttl) || ttl < 1) throw new Error('Invalid authentication expiry');
   const old = (await cookies()).get(cookieName())?.value;
   const { transaction } = await import('./db');
   await transaction(async (db) => {
@@ -48,7 +46,7 @@ export async function newSession(user: User, passwordHash: string) {
         user.id,
         { ...user, auth_provider: 'profiles', credential_tag: hashSession(passwordHash) },
         '',
-        ttl,
+        SESSION_TTL_SECONDS,
       ],
     );
     await db.query('DELETE FROM insight_hub_private.sessions WHERE expires_at<=now()');
@@ -61,7 +59,7 @@ export async function newSession(user: User, passwordHash: string) {
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
     path: '/',
-    maxAge: ttl,
+    maxAge: SESSION_TTL_SECONDS,
   });
 }
 export async function destroySession() {
