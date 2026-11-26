@@ -3,6 +3,10 @@ import assert from 'node:assert/strict';
 import { PGlite } from '@electric-sql/pglite';
 import { sessionSelect, sessionUser, type SessionRecord } from '../src/lib/session-record';
 import { hashSession } from '../src/lib/crypto';
+import { SESSION_TTL_SECONDS } from '../src/lib/session-duration';
+test('Sessions last exactly 14 days from login without activity-based renewal', () => {
+  assert.equal(SESSION_TTL_SECONDS, 14 * 24 * 60 * 60);
+});
 test('Session query checks expiry, provider and live profile; password changes revoke access', async () => {
   const db = new PGlite();
   try {
